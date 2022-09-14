@@ -18,12 +18,12 @@ async function refreshAccessToken(token) {
       refreshToken: refreshedToken.refresh_token ?? token.refreshToken, //replace if new one is offered, else fall back on old
     };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return { ...token, error: "RefreshAccessTokenError" };
   }
 }
 
-export const authOptions = {
+export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     SpotifyProvider({
@@ -40,7 +40,7 @@ export const authOptions = {
   callbacks: {
     // this info can be found https://next-auth.js.org/tutorials/refresh-token-rotation
     async jwt({ token, account, user }) {
-      //intitila sign in
+      //intitial sign in
       if (account && user) {
         return {
           ...token,
@@ -53,10 +53,12 @@ export const authOptions = {
 
       // return prev token if access token not expired
       if (Date.now() < token.accessTokenExpires) {
+        console.log("EXISTING TOKEN IS VALID", token);
         return token;
       }
 
       //access token expired, needs refresh
+      console.log("ACCESS TOKEN HAS EXPIRED, REFRESHING...");
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {
@@ -64,8 +66,8 @@ export const authOptions = {
       session.user.refreshToken = token.refreshToken;
       session.user.username = token.username;
 
+      console.log(session);
       return session;
     },
   },
-};
-export default NextAuth(authOptions);
+});
