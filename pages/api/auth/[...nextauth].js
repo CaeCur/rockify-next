@@ -53,7 +53,7 @@ export default NextAuth({
 
       // return prev token if access token not expired
       if (Date.now() < token.accessTokenExpires) {
-        console.log("EXISTING TOKEN IS VALID", token);
+        console.log("EXISTING TOKEN IS VALID");
         return token;
       }
 
@@ -66,7 +66,7 @@ export default NextAuth({
       session.user.refreshToken = token.refreshToken;
       session.user.username = token.username;
 
-      console.log(session);
+      // console.log(session);
       return session;
     },
   },
