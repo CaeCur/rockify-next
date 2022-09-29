@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { shuffle } from "lodash";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
@@ -40,14 +40,15 @@ export const Details = () => {
         setPlaylist(data.body);
       })
       .catch((err) => console.log("Something went wrong while fetching playlist data: ", err));
-  }, [spotifyApi, playlistId]);
-
-  console.log(playlist);
+  }, [spotifyApi, playlistId, setPlaylist]);
 
   return (
-    <div className="flex-grow">
+    <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8">
-        <div className="flex items-center bg-red-300 space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2">
+        <div
+          className="flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2 text-white"
+          onClick={signOut}
+        >
           <div className="relative w-10 h-10">
             {session?.user.image ? (
               <Image
@@ -68,11 +69,11 @@ export const Details = () => {
       </header>
 
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b ${color} to-black h-80 text-white padding-8`}
+        className={`flex items-end space-x-7 bg-gradient-to-b ${color} to-black h-80 text-white p-8`}
       >
         <div className="relative w-44 h-44">
           <Image
-            src={playlist?.images?.[0].url}
+            src={playlist?.images?.[0]?.url}
             alt="playlist art"
             layout="fill"
             className="shadow-2xl"
