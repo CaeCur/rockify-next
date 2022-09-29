@@ -9,7 +9,6 @@ import Songs from "./Songs";
 
 //import icons
 import { ChevronDownIcon, MusicalNoteIcon } from "@heroicons/react/24/outline";
-import spotifyApi from "../lib/spotify";
 
 const colors = [
   "from-indigo-500",
