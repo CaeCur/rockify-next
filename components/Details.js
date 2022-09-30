@@ -9,7 +9,6 @@ import Songs from "./Songs";
 
 //import icons
 import { ChevronDownIcon, MusicalNoteIcon } from "@heroicons/react/24/outline";
-import usePlaylistInfo from "../hooks/usePlaylistInfo";
 
 const colors = [
   "from-indigo-500",
