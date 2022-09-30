@@ -4,7 +4,7 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <RecoilRoot>
         <Component {...pageProps} />
       </RecoilRoot>
