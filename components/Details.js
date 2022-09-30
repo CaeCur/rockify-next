@@ -9,6 +9,7 @@ import Songs from "./Songs";
 
 //import icons
 import { ChevronDownIcon, MusicalNoteIcon } from "@heroicons/react/24/outline";
+import usePlaylistInfo from "../hooks/usePlaylistInfo";
 
 const colors = [
   "from-indigo-500",
@@ -21,12 +22,13 @@ const colors = [
 ];
 
 export const Details = () => {
-  const [color, setColor] = useState(null);
-  const playlistId = useRecoilValue(playlistIdState); //Recoil allows you to pull read only version of state
-  const [playlist, setPlaylist] = useRecoilState(playlistState);
-
   const { data: session } = useSession();
   const spotifyApi = useSpotify();
+  const [color, setColor] = useState(null);
+  const playlistId = useRecoilValue(playlistIdState); //Recoil allows you to pull read only version of state with useRecoilValue
+  const [playlist, setPlaylist] = useRecoilState(playlistState);
+
+  // const playlistInfo = usePlaylistInfo();
 
   useEffect(() => {
     setColor(shuffle(colors).pop());
