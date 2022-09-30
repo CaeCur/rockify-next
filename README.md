@@ -16,6 +16,10 @@ Due to the nature of the Spotify API, this app doesn't act as a replacement for 
 
 This app is styled after the Spotify player, however I have taken a few liberties with colors and responsiveness using TailwindCSS.
 
+## Mock Deployment URL
+
+You can test out the application via this link: https://rockify.vercel.app/
+
 ## Getting Started - Development
 
 First, run the development server:
