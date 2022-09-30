@@ -1,6 +1,4 @@
 import { getSession } from "next-auth/react";
-import Head from "next/head";
-import Image from "next/image";
 import { Details } from "../components/Details";
 import Sidebar from "../components/Sidebar";
 
@@ -22,7 +20,11 @@ export default function Home() {
 
 //pre-render user on server to get access token before hitting client
 export async function getServerSideProps(context) {
-  const sessionData = await getSession(context);
+  const session = await getSession(context);
 
-  return { props: { sessionData } };
+  return {
+    props: {
+      session,
+    },
+  };
 }
