@@ -8,6 +8,14 @@ function login({ providers }) {
     <div className="flex flex-col items-center bg-black min-h-screen w-full justify-center">
       <MusicalNoteIcon className="w-52 text-[#18D860] mb-5" />
 
+      <div className="flex items-center text-center text-white mb-5 w-[50%]">
+        <p>
+          Due to the nature of the Spotify API, this app currently only acts as a controller for
+          your Spotify device. Therefore, you should have Spotify active on a device in order to use
+          this app.
+        </p>
+      </div>
+
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
           <button
