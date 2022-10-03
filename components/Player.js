@@ -7,7 +7,6 @@ import useSongInfo from "../hooks/useSongInfo";
 import useSpotify from "../hooks/useSpotify";
 
 //import icons
-import { HeartIcon } from "@heroicons/react/24/outline";
 import {
   ArrowsRightLeftIcon,
   BackwardIcon,
@@ -46,7 +45,7 @@ export const Player = () => {
   const debouncedAdjustVolume = useCallback(
     debounce((volume) => {
       spotifyApi.setVolume(volume);
-    }, 500),
+    }, 200),
     []
   );
 
@@ -71,22 +70,24 @@ export const Player = () => {
     if (volume > 0 && volume < 100) {
       debouncedAdjustVolume(volume);
     }
-  }, [volume]);
+  }, [volume, debouncedAdjustVolume]);
 
   return (
     <div className="h-24 bg-gradient-to-b from-black to-gray-900 text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
       {/* left section */}
       <div className="flex items-center space-x-4">
-        <div className="hidden md:inline">
-          <div className="relative w-10 h-10">
-            <Image
-              src={songInfo?.album?.images?.[0].url}
-              layout="fill"
-              alt="song art"
-              className=""
-            />
+        {songInfo && (
+          <div className="hidden md:inline">
+            <div className="relative w-10 h-10">
+              <Image
+                src={songInfo?.album?.images?.[0].url}
+                layout="fill"
+                alt="song art"
+                className=""
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         <div>
           <h3>{songInfo?.name}</h3>
